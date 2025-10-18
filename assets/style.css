@@ -1,0 +1,132 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100dvh;
+    padding: 12px;
+    background-color: #ffffff;
+}
+
+.main {
+    max-width:400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid #ccc;
+    box-shadow: 4px 4px 8px rgba(43, 41, 41, 0.1);
+    padding: 22px;
+    border-radius: 22px;
+    background-color: #ffffff;
+}
+
+.display {
+    width: 100%;
+    height: 110px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 12px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    color: #ffffff;
+    background-color: #1D2D44;
+}
+
+.display .result {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.special-buttons {
+    width: 100%;
+    display: flex;
+    margin-top: 12px;
+    justify-content: center;
+}
+
+.special-column {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.special-buttons button{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    background-color: #F40000;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.1s ease-in-out;
+}
+
+.special-buttons button:hover {
+    opacity: 0.8;
+}
+
+.columns {
+    width: 100%;
+    display: flex;
+    margin-top: 12px;
+}
+
+.column1,
+.column2,
+.column3,
+.column4 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-items: center;
+    row-gap: 12px;
+}
+
+.column button {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    transition: 0.1s ease-in-out;
+}
+
+.column button:hover {
+    opacity: 0.8;
+}
+
+.column1 button,
+.column2 button,
+.column3 button {
+    background-color: #1D2D44;
+}
+
+.column3 button:last-child {
+    background-color: #FF8600;
+}
+
+.column4 button {
+    background-color: #256EFF;
+}
