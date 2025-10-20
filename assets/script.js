@@ -9,6 +9,7 @@ let left;
 let anyNumber = document.querySelectorAll('.number')
 let anyOperator = document.querySelectorAll('.operator')
 let display = document.querySelector('.display .result')
+let equal = document.querySelector('.equal')
 
 //Convert nodeList to Array
 anyNumber = Array.from(anyNumber)
@@ -38,24 +39,36 @@ function divide(number1, number2) {
 
 // function to call one of the basic mathematical operations
 function operate(number1, operator, number2) {
+    console.log(number1)
     console.log(operator)
+    console.log(number2)
+    let result;
+
     switch(operator) {
         case '+' :
-            return add(number1,number2);
+            result = add(number1,number2);
         break;
-        case '-':
-            return subtract(number1,number2);
+        case '−':
+            result = subtract(number1,number2);
         break;
-        case '*':
-            return multiply(number1,number2);
+        case '×':
+            result = multiply(number1,number2);
         break;
-        case '/':
-            return divide(number1,number2);
+        case '÷':
+            result = divide(number1,number2);
         break;
         default:
-            return console.log("Invalid operator");
+            console.log("Invalid operator");
     }
+
+    display.textContent += ` = ${result}`
 }
+
+equal.addEventListener('click', () => {
+    if(number1 != undefined && operatorToUse != undefined && number2 != undefined ) {
+        operate(number1, operatorToUse, number2)
+    }
+})
 
 // Function to populate the calculator's display
 function populateDisplay (content, withPrevious) {
