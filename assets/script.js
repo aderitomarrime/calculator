@@ -39,9 +39,6 @@ function divide(number1, number2) {
 
 // function to call one of the basic mathematical operations
 function operate(number1, operator, number2) {
-    console.log(number1)
-    console.log(operator)
-    console.log(number2)
     let result;
 
     switch(operator) {
@@ -58,15 +55,18 @@ function operate(number1, operator, number2) {
             result = divide(number1,number2);
         break;
         default:
-            console.log("Invalid operator");
+            result ="Invalid operator";
     }
 
-    display.textContent += ` = ${result}`
+    return result
 }
 
 equal.addEventListener('click', () => {
     if(number1 != undefined && operatorToUse != undefined && number2 != undefined ) {
-        operate(number1, operatorToUse, number2)
+        let result = operate(number1, operatorToUse, number2)
+        populateDisplay(`${result}`, 0)
+    } else{
+        console.log('nothing')
     }
 })
 
@@ -84,7 +84,7 @@ function populateDisplay (content, withPrevious) {
 
 // Callback funtion to get the number clicked and call the function storeNumber
 function getNumber(number) {
-    return number.addEventListener('click', () => {
+    number.addEventListener('click', () => {
         storeNumber(number.textContent)
     })
 }
@@ -107,14 +107,13 @@ function storeNumber(number) {
             auxiliarNumber = number
             left = display.textContent;
             populateDisplay(` ${auxiliarNumber}`,1)
-            number2 = auxiliarNumber
+            number2 = Number(auxiliarNumber)
 
         } else {
             auxiliarNumber = auxiliarNumber.toString() + number
             auxiliarNumber = Number(auxiliarNumber)
             number2 = auxiliarNumber
             populateDisplay(`${left} ${auxiliarNumber}`,0)
-            number2 = auxiliarNumber
             
         }
         
@@ -130,7 +129,15 @@ function getOperator(operator) {
 
 //Store the operator to make the operation and  store the first number to make the operation
 function storeOperator (operator) {
-    if(operatorToUse != undefined && operatorToUse !=operator) {
+    if(number1 != undefined && operatorToUse != undefined && number2 != undefined) {
+        let result = operate(number1, operatorToUse, number2)
+        operatorToUse = operator
+        populateDisplay(`${result} ${operatorToUse}`, 0)
+        number1 = result
+        number2 = undefined
+        auxiliarNumber = undefined
+
+    } else if(operatorToUse != undefined && operatorToUse != operator) {
         let text = display.textContent
         text = text.split('')
         text.pop()
@@ -140,7 +147,7 @@ function storeOperator (operator) {
         populateDisplay(text,0)
 
     } else if(auxiliarNumber !== undefined) {
-       number1 = auxiliarNumber;
+       number1 = Number(auxiliarNumber);
        operatorToUse = operator;
        auxiliarNumber = undefined
        populateDisplay(`${operatorToUse}`,1)
