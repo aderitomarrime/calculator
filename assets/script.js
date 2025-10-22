@@ -115,8 +115,12 @@ function getNumber(number) {
 
 //Store the first number of the operation into a uxiliar variable and store the second number of the opertaion
 function storeNumber(number) {
+    if(number1 != undefined && operatorToUse != undefined && number2 != undefined && auxiliarNumber != undefined) {
+        wipeExistingtData()
+        auxiliarNumber = number
+        populateDisplay(`${auxiliarNumber} `,0)
 
-    if(number1 == undefined) {
+    }else if(number1 == undefined) {
         if(auxiliarNumber !== undefined) {
             auxiliarNumber = auxiliarNumber.toString() + number
         } else {
