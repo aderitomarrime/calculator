@@ -58,7 +58,8 @@ function operate(number1, operator, number2) {
             result ="Invalid operator";
     }
 
-    return result
+
+    return Math.round((result + Number.EPSILON) * 100) / 100
 }
 
 equal.addEventListener('click', () => {
