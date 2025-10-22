@@ -53,14 +53,22 @@ function operate(number1, operator, number2) {
             result = multiply(number1,number2);
         break;
         case '÷':
-            result = divide(number1,number2);
+            if(number2 === 0) {
+                result = 'Stop being selfish'
+            } else {
+                result = divide(number1,number2);
+            }
         break;
         default:
             result ="Invalid operator";
     }
 
-
-    return Math.round((result + Number.EPSILON) * 100) / 100
+    if(typeof result === 'number') {
+        return Math.round((result + Number.EPSILON) * 100) / 100
+    } else {
+        wipeExistingtData()
+        return result
+    }
 }
 
 equal.addEventListener('click', () => {
