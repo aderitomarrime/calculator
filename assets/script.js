@@ -10,6 +10,7 @@ let anyNumber = document.querySelectorAll('.number')
 let anyOperator = document.querySelectorAll('.operator')
 let display = document.querySelector('.display .result')
 let equal = document.querySelector('.equal')
+let clear = document.querySelector('.clear')
 
 //Convert nodeList to Array
 anyNumber = Array.from(anyNumber)
@@ -70,6 +71,20 @@ equal.addEventListener('click', () => {
         console.log('nothing')
     }
 })
+
+clear.addEventListener('click', () => {
+    wipeExistingtData()
+})
+
+//Wipe all existing data
+
+function wipeExistingtData() {
+    auxiliarNumber = undefined
+    number1 = undefined
+    operatorToUse = undefined
+    number2 = undefined
+    display.textContent = ''
+}
 
 // Function to populate the calculator's display
 function populateDisplay (content, withPrevious) {
