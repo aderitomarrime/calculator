@@ -1,5 +1,6 @@
 //Declare variables
 let auxiliarNumber;
+let auxiliarResult;
 let number1;
 let number2;
 let operatorToUse;
@@ -64,9 +65,12 @@ function operate(number1, operator, number2) {
     }
 
     if(typeof result === 'number') {
-        return Math.round((result + Number.EPSILON) * 100) / 100
+        result = Math.round((result + Number.EPSILON) * 100) / 100
+        auxiliarResult = result
+        return result
     } else {
         wipeExistingtData()
+        auxiliarResult = result
         return result
     }
 }
@@ -88,6 +92,7 @@ clear.addEventListener('click', () => {
 
 function wipeExistingtData() {
     auxiliarNumber = undefined
+    auxiliarResult = undefined
     number1 = undefined
     operatorToUse = undefined
     number2 = undefined
@@ -115,7 +120,7 @@ function getNumber(number) {
 
 //Store the first number of the operation into a uxiliar variable and store the second number of the opertaion
 function storeNumber(number) {
-    if(number1 != undefined && operatorToUse != undefined && number2 != undefined && auxiliarNumber != undefined) {
+    if(auxiliarResult != undefined) {
         wipeExistingtData()
         auxiliarNumber = number
         populateDisplay(`${auxiliarNumber} `,0)
