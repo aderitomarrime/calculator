@@ -1,10 +1,11 @@
 //Declare variables
 let auxiliarNumber;
-let auxiliarResult;
 let number1;
 let number2;
 let operatorToUse;
 let left;
+let result
+let auxiliarWipe;
 
 //Declare variables and store the node references
 let anyNumber = document.querySelectorAll('.number')
@@ -41,7 +42,6 @@ function divide(number1, number2) {
 
 // function to call one of the basic mathematical operations
 function operate(number1, operator, number2) {
-    let result;
 
     switch(operator) {
         case '+' :
@@ -64,13 +64,10 @@ function operate(number1, operator, number2) {
             result ="Invalid operator";
     }
 
+    auxiliarNumberWipe = true
     if(typeof result === 'number') {
-        result = Math.round((result + Number.EPSILON) * 100) / 100
-        auxiliarResult = result
-        return result
+        return Math.round((result + Number.EPSILON) * 100) / 100
     } else {
-        wipeExistingtData()
-        auxiliarResult = result
         return result
     }
 }
@@ -92,11 +89,12 @@ clear.addEventListener('click', () => {
 
 function wipeExistingtData() {
     auxiliarNumber = undefined
-    auxiliarResult = undefined
     number1 = undefined
     operatorToUse = undefined
     number2 = undefined
-    display.textContent = ''
+    display.textContent = '' 
+    result = undefined
+    auxiliarWipe = undefined
 }
 
 // Function to populate the calculator's display
@@ -120,7 +118,7 @@ function getNumber(number) {
 
 //Store the first number of the operation into a uxiliar variable and store the second number of the opertaion
 function storeNumber(number) {
-    if(auxiliarResult != undefined) {
+    if((result != undefined && auxiliarWipe != undefined) || (typeof result === 'string')) {
         wipeExistingtData()
         auxiliarNumber = number
         populateDisplay(`${auxiliarNumber} `,0)
@@ -162,7 +160,10 @@ function getOperator(operator) {
 
 //Store the operator to make the operation and  store the first number to make the operation
 function storeOperator (operator) {
-    if(number1 != undefined && operatorToUse != undefined && number2 != undefined) {
+    if(typeof result === 'string') {
+        wipeExistingtData()
+    }
+    else if(number1 != undefined && operatorToUse != undefined && number2 != undefined) {
         let result = operate(number1, operatorToUse, number2)
         operatorToUse = operator
         populateDisplay(`${result} ${operatorToUse}`, 0)
