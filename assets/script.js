@@ -128,12 +128,17 @@ function getNumber(number) {
 
 //Store the first number of the operation into a uxiliar variable and store the second number of the opertaion
 function storeNumber(number) {
-    if((result != undefined && auxiliarWipe != undefined) || (typeof result === 'string')) {
+    if(result != undefined) {
+        wipeExistingtData()
+        auxiliarNumber = number
+        populateDisplay(`${auxiliarNumber} `,0)
+        
+    } else if((result != undefined && auxiliarWipe != undefined) || (typeof result === 'string')) {
         wipeExistingtData()
         auxiliarNumber = number
         populateDisplay(`${auxiliarNumber} `,0)
 
-    }else if(number1 == undefined) {
+    } else if(number1 == undefined) {
         if(auxiliarNumber !== undefined) {
             auxiliarNumber = auxiliarNumber.toString() + number
         } else {
