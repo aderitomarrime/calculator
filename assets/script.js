@@ -8,6 +8,7 @@ let result
 let auxiliarWipe;
 let floatingPoint1
 let floatingPoint2
+let auxiliarResult
 
 //Declare variables and store the node references
 let anyNumber = document.querySelectorAll('.number')
@@ -68,7 +69,7 @@ function operate(number1, operator, number2) {
             result ="Invalid operator";
     }
 
-    auxiliarNumberWipe = true
+    // auxiliarNumberWipe = true
     if(typeof result === 'number') {
         return Math.round((result + Number.EPSILON) * 100) / 100
     } else {
@@ -81,6 +82,7 @@ equal.addEventListener('click', () => {
         let result = operate(number1, operatorToUse, number2)
         populateDisplay(`${result}`, 0)
         auxiliarNumber = undefined
+        auxiliarResult = true
     } else{
         console.log('nothing')
     }
@@ -128,10 +130,11 @@ function getNumber(number) {
 
 //Store the first number of the operation into a uxiliar variable and store the second number of the opertaion
 function storeNumber(number) {
-    if(result != undefined && number1 != undefined && operatorToUse != undefined && number2 != undefined) {
+    if(result != undefined && number1 != undefined && operatorToUse != undefined && number2 != undefined && auxiliarResult != undefined) {
         wipeExistingtData()
         auxiliarNumber = number
         populateDisplay(`${auxiliarNumber} `,0)
+        auxiliarResult = undefined;
 
     } else if((result != undefined && auxiliarWipe != undefined) || (typeof result === 'string')) {
         wipeExistingtData()
@@ -208,6 +211,8 @@ function storeOperator (operator) {
     } else {
         console.log('nothing')
     }
+    
+    auxiliarResult = undefined
 
 }
 
@@ -235,6 +240,7 @@ function removeLastDigit() {
         if(auxiliarNumber.lenght <= 0) {
             auxiliarNumber = undefined
         }
+
         auxiliarNumber = auxiliarNumber.join('')
 
         populateDisplay(auxiliarNumber,0)
@@ -247,16 +253,20 @@ function removeLastDigit() {
         number1.pop()
         console.log(number1)
 
-        if(number1.lenght <= 0) {
+        if(number1.length == 0) {
             number1 = undefined
+        } else {
+            number1 = number1.join('')
         }
-
-        number1 = number1.join('')
         console.log(number1)
-
         populateDisplay(number1,0)
+
     }
      else if (number1 != undefined && operatorToUse != undefined && auxiliarNumber == undefined && number2 == undefined) {
+        operatorToUse = undefined
+        
+        populateDisplay(number1,0)
+    } else if (number1 != undefined && operatorToUse != undefined && auxiliarNumber != undefined && number2 == undefined) {
         operatorToUse = undefined
         
         populateDisplay(number1,0)
@@ -267,27 +277,32 @@ function removeLastDigit() {
             number2 = number2.split('')
             number2.pop()
 
-            if(number2.lenght <= 0) {
+            if(number2.length == 0) {
                 number2 = undefined
+                auxiliarNumber = number1
+                populateDisplay(`${number1} ${operatorToUse}`,0)
+            } else {
+                number2 = number2.join('')
+                populateDisplay(`${number1} ${operatorToUse} ${number2}`,0)
             }
-
-            number2 = number2.join('')
-    
-            populateDisplay(`${number1} ${operatorToUse} ${number2}`,0)
 
         }else if(auxiliarNumber !== undefined){
 
             number2 = number2.toString()
             number2 = number2.split('')
             number2.pop()
+            console.log(number2.length)
 
-            if(number2.lenght <= 0) {
+            if(number2.length == 0) {
                 number2 = undefined
+                auxiliarNumber = undefined
+                console.log('entrou')
+                populateDisplay(`${result} ${operatorToUse}`,0)
+            } else {
+                number2 = number2.join('')
+                populateDisplay(`${result} ${operatorToUse} ${number2}`,0)
             }
-
-            number2 = number2.join('')
     
-            populateDisplay(`${result} ${operatorToUse} ${number2}`,0)
         }
     }
     else {
