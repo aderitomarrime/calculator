@@ -211,13 +211,13 @@ function storeOperator (operator) {
     } else {
         console.log('nothing')
     }
-    
+
     auxiliarResult = undefined
 
 }
 
 
-
+// A function enable floating point to numbers
 function getFloatingPoint() {
     if(auxiliarNumber != undefined && operatorToUse == undefined && number2 == undefined && floatingPoint1 == undefined) {
         auxiliarNumber = auxiliarNumber + '.'
@@ -231,6 +231,7 @@ function getFloatingPoint() {
     }
 }
 
+// A function to enable backspace
 function removeLastDigit() {
     if(auxiliarNumber != undefined && operatorToUse == undefined && number2 == undefined) {
         auxiliarNumber = auxiliarNumber.toString()
@@ -270,6 +271,9 @@ function removeLastDigit() {
         operatorToUse = undefined
         
         populateDisplay(number1,0)
+        auxiliarNumber = number1
+        number1 = undefined
+        
     } else if(number1 != undefined && operatorToUse != undefined && number2 != undefined){
         if (result === undefined) {
             console.log('oi1')
@@ -279,10 +283,11 @@ function removeLastDigit() {
 
             if(number2.length == 0) {
                 number2 = undefined
-                auxiliarNumber = number1
+                auxiliarNumber = undefined
                 populateDisplay(`${number1} ${operatorToUse}`,0)
             } else {
                 number2 = number2.join('')
+                auxiliarNumber = number2
                 populateDisplay(`${number1} ${operatorToUse} ${number2}`,0)
             }
 
