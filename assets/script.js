@@ -6,6 +6,8 @@ let operatorToUse;
 let left;
 let result
 let auxiliarWipe;
+let floatingPoint1
+let floatingPoint2
 
 //Declare variables and store the node references
 let anyNumber = document.querySelectorAll('.number')
@@ -13,6 +15,7 @@ let anyOperator = document.querySelectorAll('.operator')
 let display = document.querySelector('.display .result')
 let equal = document.querySelector('.equal')
 let clear = document.querySelector('.clear')
+let floatingPoint = document.querySelector('.floating-point')
 
 //Convert nodeList to Array
 anyNumber = Array.from(anyNumber)
@@ -85,6 +88,8 @@ clear.addEventListener('click', () => {
     wipeExistingtData()
 })
 
+floatingPoint.addEventListener('click', getFloatingPoint)
+
 //Wipe all existing data
 
 function wipeExistingtData() {
@@ -95,6 +100,8 @@ function wipeExistingtData() {
     display.textContent = '' 
     result = undefined
     auxiliarWipe = undefined
+    floatingPoint1 = undefined
+    floatingPoint2 = undefined
 }
 
 // Function to populate the calculator's display
@@ -190,4 +197,19 @@ function storeOperator (operator) {
         console.log('nothing')
     }
 
+}
+
+
+
+function getFloatingPoint() {
+    if(auxiliarNumber != undefined && operatorToUse == undefined && number2 == undefined && floatingPoint1 == undefined) {
+        auxiliarNumber = auxiliarNumber + '.'
+        populateDisplay(auxiliarNumber,0)
+        floatingPoint1 = true
+
+    }else if(auxiliarNumber != undefined && operatorToUse != undefined && floatingPoint2 == undefined) {
+        auxiliarNumber = auxiliarNumber + '.'
+        populateDisplay('.', 1)
+        floatingPoint2 = true
+    }
 }
