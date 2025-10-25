@@ -76,12 +76,19 @@ body {
     color: #ffffff;
     font-weight: bold;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 22px;
     transition: 0.1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .special-buttons button:hover {
     opacity: 0.8;
+}
+
+.backspace span {
+    font-size: 32px;
 }
 
 .columns {

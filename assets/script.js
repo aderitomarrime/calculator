@@ -16,6 +16,7 @@ let display = document.querySelector('.display .result')
 let equal = document.querySelector('.equal')
 let clear = document.querySelector('.clear')
 let floatingPoint = document.querySelector('.floating-point')
+let backspace = document.querySelector('.backspace')
 
 //Convert nodeList to Array
 anyNumber = Array.from(anyNumber)
@@ -79,6 +80,7 @@ equal.addEventListener('click', () => {
     if(number1 != undefined && operatorToUse != undefined && number2 != undefined ) {
         let result = operate(number1, operatorToUse, number2)
         populateDisplay(`${result}`, 0)
+        auxiliarNumber = undefined
     } else{
         console.log('nothing')
     }
@@ -90,8 +92,9 @@ clear.addEventListener('click', () => {
 
 floatingPoint.addEventListener('click', getFloatingPoint)
 
-//Wipe all existing data
+backspace.addEventListener('click', removeLastDigit)
 
+//Wipe all existing data
 function wipeExistingtData() {
     auxiliarNumber = undefined
     number1 = undefined
@@ -191,8 +194,11 @@ function storeOperator (operator) {
        number1 = Number(auxiliarNumber);
        operatorToUse = operator;
        auxiliarNumber = undefined
-       populateDisplay(`${operatorToUse}`,1)
+       populateDisplay(` ${operatorToUse}`,1)
 
+    } else if(number1 != undefined && operatorToUse == undefined) {
+        operatorToUse = operator;
+        populateDisplay(` ${operatorToUse} `,1)
     } else {
         console.log('nothing')
     }
@@ -211,5 +217,74 @@ function getFloatingPoint() {
         auxiliarNumber = auxiliarNumber + '.'
         populateDisplay('.', 1)
         floatingPoint2 = true
+    }
+}
+
+function removeLastDigit() {
+    if(auxiliarNumber != undefined && operatorToUse == undefined && number2 == undefined) {
+        auxiliarNumber = auxiliarNumber.toString()
+        auxiliarNumber = auxiliarNumber.split('')
+        auxiliarNumber.pop()
+
+        if(auxiliarNumber.lenght <= 0) {
+            auxiliarNumber = undefined
+        }
+        auxiliarNumber = auxiliarNumber.join('')
+
+        populateDisplay(auxiliarNumber,0)
+
+    } else if(number1 != undefined && operatorToUse == undefined && number2 == undefined) {
+        number1 = number1.toString()
+        console.log(number1)
+        number1 = number1.split('')
+        console.log(number1)
+        number1.pop()
+        console.log(number1)
+
+        if(number1.lenght <= 0) {
+            number1 = undefined
+        }
+
+        number1 = number1.join('')
+        console.log(number1)
+
+        populateDisplay(number1,0)
+    }
+     else if (number1 != undefined && operatorToUse != undefined && auxiliarNumber == undefined && number2 == undefined) {
+        operatorToUse = undefined
+        
+        populateDisplay(number1,0)
+    } else if(number1 != undefined && operatorToUse != undefined && number2 != undefined){
+        if (result === undefined) {
+            console.log('oi1')
+            number2 = number2.toString()
+            number2 = number2.split('')
+            number2.pop()
+
+            if(number2.lenght <= 0) {
+                number2 = undefined
+            }
+
+            number2 = number2.join('')
+    
+            populateDisplay(`${number1} ${operatorToUse} ${number2}`,0)
+
+        }else if(auxiliarNumber !== undefined){
+
+            number2 = number2.toString()
+            number2 = number2.split('')
+            number2.pop()
+
+            if(number2.lenght <= 0) {
+                number2 = undefined
+            }
+
+            number2 = number2.join('')
+    
+            populateDisplay(`${result} ${operatorToUse} ${number2}`,0)
+        }
+    }
+    else {
+        console.log('nothing')
     }
 }
