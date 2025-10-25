@@ -145,8 +145,8 @@ function storeNumber(number) {
             auxiliarNumber = number
         }
 
-        auxiliarNumber = Number(auxiliarNumber)
         populateDisplay(` ${auxiliarNumber} `,0)
+        auxiliarNumber = Number(auxiliarNumber)
 
     } else if(number1 != undefined) {
         if(auxiliarNumber == undefined) {
@@ -157,9 +157,10 @@ function storeNumber(number) {
 
         } else {
             auxiliarNumber = auxiliarNumber.toString() + number
-            auxiliarNumber = Number(auxiliarNumber)
             number2 = auxiliarNumber
             populateDisplay(`${left} ${auxiliarNumber}`,0)
+            auxiliarNumber = Number(auxiliarNumber)
+            number2 = Number(number2)
             
         }
         
