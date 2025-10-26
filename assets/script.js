@@ -4,11 +4,12 @@ let number1;
 let number2;
 let operatorToUse;
 let left;
-let result
+let result;
 let auxiliarWipe;
-let floatingPoint1
-let floatingPoint2
-let auxiliarResult
+let floatingPoint1;
+let floatingPoint2;
+let auxiliarResult;
+let lastDigit;
 
 //Declare variables and store the node references
 let anyNumber = document.querySelectorAll('.number')
@@ -228,6 +229,10 @@ function getFloatingPoint() {
         auxiliarNumber = auxiliarNumber + '.'
         populateDisplay('.', 1)
         floatingPoint2 = true
+    } else if (number1 != undefined && operatorToUse == undefined && auxiliarNumber == undefined) {
+        number1 = number1 + '.'
+        populateDisplay('.', 1)
+        floatingPoint1 = true
     }
 }
 
@@ -236,7 +241,13 @@ function removeLastDigit() {
     if(auxiliarNumber != undefined && operatorToUse == undefined && number2 == undefined) {
         auxiliarNumber = auxiliarNumber.toString()
         auxiliarNumber = auxiliarNumber.split('')
-        auxiliarNumber.pop()
+
+        lastDigit = auxiliarNumber.pop()
+
+        if(lastDigit == '.') {
+            floatingPoint1 = undefined
+            lastDigit = undefined
+        }
 
         if(auxiliarNumber.lenght <= 0) {
             auxiliarNumber = undefined
@@ -248,25 +259,30 @@ function removeLastDigit() {
 
     } else if(number1 != undefined && operatorToUse == undefined && number2 == undefined) {
         number1 = number1.toString()
-        console.log(number1)
         number1 = number1.split('')
-        console.log(number1)
-        number1.pop()
-        console.log(number1)
+
+        lastDigit = number1.pop()
+
+        if(lastDigit == '.') {
+            floatingPoint1 = undefined
+            lastDigit = undefined
+        }
 
         if(number1.length == 0) {
             number1 = undefined
         } else {
             number1 = number1.join('')
         }
-        console.log(number1)
         populateDisplay(number1,0)
 
     }
      else if (number1 != undefined && operatorToUse != undefined && auxiliarNumber == undefined && number2 == undefined) {
         operatorToUse = undefined
         
-        populateDisplay(number1,0)
+        auxiliarNumber = number1
+        number1 = undefined
+        
+        populateDisplay(auxiliarNumber,0)
     } else if (number1 != undefined && operatorToUse != undefined && auxiliarNumber != undefined && number2 == undefined) {
         operatorToUse = undefined
         
@@ -276,10 +292,15 @@ function removeLastDigit() {
         
     } else if(number1 != undefined && operatorToUse != undefined && number2 != undefined){
         if (result === undefined) {
-            console.log('oi1')
             number2 = number2.toString()
             number2 = number2.split('')
-            number2.pop()
+            
+            lastDigit = number2.pop()
+
+            if(lastDigit == '.') {
+                floatingPoint2 = undefined
+                lastDigit = undefined
+            }
 
             if(number2.length == 0) {
                 number2 = undefined
