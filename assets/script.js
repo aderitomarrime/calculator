@@ -80,9 +80,7 @@ function operate(number1, operator, number2) {
 
 equal.addEventListener('click', executeOperaction)
 
-clear.addEventListener('click', () => {
-    wipeExistingtData()
-})
+clear.addEventListener('click', wipeExistingtData)
 
 floatingPoint.addEventListener('click', getFloatingPoint)
 
