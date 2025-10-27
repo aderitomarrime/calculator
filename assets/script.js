@@ -78,16 +78,7 @@ function operate(number1, operator, number2) {
     }
 }
 
-equal.addEventListener('click', () => {
-    if(number1 != undefined && operatorToUse != undefined && number2 != undefined ) {
-        let result = operate(number1, operatorToUse, number2)
-        populateDisplay(`${result}`, 0)
-        auxiliarNumber = undefined
-        auxiliarResult = true
-    } else{
-        console.log('nothing')
-    }
-})
+equal.addEventListener('click', executeOperaction)
 
 clear.addEventListener('click', () => {
     wipeExistingtData()
@@ -96,6 +87,8 @@ clear.addEventListener('click', () => {
 floatingPoint.addEventListener('click', getFloatingPoint)
 
 backspace.addEventListener('click', removeLastDigit)
+
+window.addEventListener('keyup', getKey)
 
 //Wipe all existing data
 function wipeExistingtData() {
@@ -217,6 +210,17 @@ function storeOperator (operator) {
 
 }
 
+// A function to execute the operation when the equal(=) button is clicked
+function executeOperaction() {
+    if(number1 != undefined && operatorToUse != undefined && number2 != undefined ) {
+        let result = operate(number1, operatorToUse, number2)
+        populateDisplay(`${result}`, 0)
+        auxiliarNumber = undefined
+        auxiliarResult = true
+    } else{
+        console.log('nothing')
+    }
+}
 
 // A function enable floating point to numbers
 function getFloatingPoint() {
@@ -278,7 +282,7 @@ function removeLastDigit() {
     }
      else if (number1 != undefined && operatorToUse != undefined && auxiliarNumber == undefined && number2 == undefined) {
         operatorToUse = undefined
-        
+
         auxiliarNumber = number1
         number1 = undefined
         
@@ -333,5 +337,67 @@ function removeLastDigit() {
     }
     else {
         console.log('nothing')
+    }
+}
+
+function getKey(pressedKey) {
+    console.log(`key: ${pressedKey.key} code: ${pressedKey.code}`)
+    switch(pressedKey.key) {
+        case '0':
+            storeNumber(pressedKey.key)
+        break;
+        case '1':
+            storeNumber(pressedKey.key)
+        break;
+        case '2':
+            storeNumber(pressedKey.key)
+        break;
+        case '3':
+            storeNumber(pressedKey.key)
+        break;
+        case '4':
+            storeNumber(pressedKey.key)
+        break;
+        case '5':
+            storeNumber(pressedKey.key)
+        break;
+        case '6':
+            storeNumber(pressedKey.key)
+        break;
+        case '7':
+            storeNumber(pressedKey.key)
+        break;
+        case '8':
+            storeNumber(pressedKey.key)
+        break;
+        case '9':
+            storeNumber(pressedKey.key)
+        break;
+        case '/':
+            storeOperator('÷')
+        break;
+        case '*':
+            storeOperator('×')
+        break;
+        case '+':
+            storeOperator('+')
+        break;
+        case '-':
+            storeOperator('−')
+        break;
+        case '.':
+            getFloatingPoint()
+        break;
+        case 'c':
+            wipeExistingtData()
+        break;
+        case 'Backspace':
+            removeLastDigit()
+        break;
+        case 'Enter':
+            executeOperaction()
+        break;
+        default :
+            console.log('Invalid key')
     }
 }
