@@ -63,11 +63,11 @@ cd calculator
 
 Once the website is open:
 
-1. Enter a number in the input field.
+1. Digit a number.
 2. Choose a mathematical operator (addition, subtraction, multiplication, or division).
-3. Enter a second number.
+3. Digit a second number.
 4. Click the "=" button to see the result.
-5. To clear all input and reset the calculator, click the "Clear" button.
+5. To clear all input and reset the calculator, click the "C" button.
 6. If you make a mistake while typing, click the "Backspace" button to remove the last input.
 
 
